@@ -22,20 +22,19 @@
       flex-wrap: wrap;
       gap: 15px;
     }
-    .favorites img {
+    /* .favorites img {
       width: 150px;
-    }
+    } */
   </style>
   <body>
-    <div id="app"></div>
-
-    <!-- <h1>1번째 고양이 가라사대</h1>
-    <form>
+    <!-- <form>
       <input type="text" name="name" placeholder="영어 대사를 입력해주세요" />
       <button type="submit">생성</button>
-    </form>
-    
-    <ul class="favorites">
+    </form> -->
+
+    <div id="app"></div>
+
+    <!-- <ul class="favorites">
       <li>
         <img
           src="https://cataas.com/cat/60b73094e04e18001194a309/says/react"
@@ -48,7 +47,8 @@
           alt="고양이"
         />
       </li>
-    </ul> -->
+    </ul>
+    -->
 
     <script
       src="https://unpkg.com/react@17/umd/react.development.js"
@@ -62,9 +62,10 @@
 
     <script type="text/babel">
       function CatItem(props) {
+        const myStyle = { width: "150px" };
         return (
           <li>
-            <img src={props.img} alt="고양이" />
+            <img style={myStyle} src={props.img} alt="고양이" />
           </li>
         );
       }
@@ -75,7 +76,7 @@
 
       function Favorites() {
         return (
-          <ul class="favorites">
+          <ul className="favorites">
             <CatItem img="https://cataas.com/cat/60b73094e04e18001194a309/says/react" />
             <CatItem img="https://cataas.com//cat/5e9970351b7a400011744233/says/inflearn" />
           </ul>
@@ -83,21 +84,51 @@
       }
 
       function MainCard() {
+        function handleClickHeart() {
+          console.log("하트 클릭");
+        }
+
+        function handleMouseOverHeart() {
+          console.log("하트 슈슈슉");
+        }
+
         return (
-          <div class="main-card">
+          <div className="main-card">
             <img
               src="https://cataas.com/cat/60b73094e04e18001194a309/says/react"
               alt="고양이"
               width="400"
             />
-            <button>🤍</button>
+            <button
+              onClick={handleClickHeart}
+              onMouseOver={handleMouseOverHeart}
+            >
+              🤍
+            </button>
           </div>
         );
       }
-
+      function Form() {
+        function handleSubmit(e) {
+          console.log(e);
+          e.preventDefault();
+          console.log("폼 전송됨~");
+        }
+        return (
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="name"
+              placeholder="영어 대사를 입력해주세요"
+            />
+            <button type="submit">생성</button>
+          </form>
+        );
+      }
       const app = (
         <div>
           <Title>1번째 고양이</Title>
+          <Form />
           <MainCard />
           <Favorites />
         </div>
